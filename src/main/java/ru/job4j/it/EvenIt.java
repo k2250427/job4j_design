@@ -14,14 +14,10 @@ public class EvenIt implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        boolean rsl = false;
-        for (int i = point; i < data.length; i++) {
-            if (data[i] % 2 == 0) {
-                rsl = true;
-                break;
-            }
+        while (point < data.length && data[point] % 2 != 0) {
+            point++;
         }
-        return rsl;
+        return point < data.length && data[point] % 2 == 0;
     }
 
     @Override
@@ -29,10 +25,6 @@ public class EvenIt implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        while (point < data.length && data[point] % 2 != 0) {
-            point++;
-        }
-        point++;
-        return data[point - 1];
+        return data[point++];
     }
 }
