@@ -32,9 +32,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
     public void remove(int index) {
         Objects.checkIndex(index, bound);
-        for (int i = index + 1; i < bound; i++) {
-            data[i - 1] = data[i];
-        }
+        System.arraycopy(data, index + 1, data, index, bound - index - 1);
         bound--;
     }
 
