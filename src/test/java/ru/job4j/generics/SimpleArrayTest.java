@@ -58,11 +58,11 @@ public class SimpleArrayTest {
     public void whenIterate() {
         SimpleArray<Integer> arr = new SimpleArray<>(3);
         arr.add(0);
-        arr.add(1);
+        arr.add(null);
         arr.add(2);
         Iterator<Integer> it = arr.iterator();
         assertThat(it.next(), is(0));
-        assertThat(it.next(), is(1));
+        assertNull(it.next());
         assertThat(it.next(), is(2));
     }
 }

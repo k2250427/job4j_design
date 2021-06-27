@@ -4,34 +4,37 @@ import javax.swing.text.html.Option;
 import java.util.*;
 
 public class SimpleArray<T> implements Iterable<T> {
-    private ArrayList<Optional<T>> data;
+    private Object[] data;
     private int size;
-    private int bound = -1;
+    private int bound;
 
     public SimpleArray(int size) {
-        this.data = new ArrayList<>();
+        this.data = new Object[size];
         this.size = size;
+        this.bound = 0;
     }
 
     public void add(T model) {
-        Objects.checkIndex(data.size(), size);
-        data.add(Optional.of(model));
-        bound++;
+        Objects.checkIndex(bound, size);
+            data[bound++] = model;
     }
 
     public T get(int index) {
-        Objects.checkIndex(index, bound + 1);
-        return data.get(index).get();
+        Objects.checkIndex(index, bound);
+        return (T) data[index];
     }
 
     public void set(int index, T model) {
-        Objects.checkIndex(index, bound + 1);
-        data.set(index, Optional.of(model));
+        Objects.checkIndex(index, bound);
+        data[index] = model;
+        bound++;
     }
 
     public void remove(int index) {
-        Objects.checkIndex(index, bound + 1);
-        data.remove(index);
+        Objects.checkIndex(index, bound);
+        for (int i = index + 1; i < bound; i++) {
+            data[i - 1] = data[i];
+        }
         bound--;
     }
 
@@ -53,14 +56,11 @@ public class SimpleArray<T> implements Iterable<T> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            return data.get(current++).get();
+            return (T) data[current++];
         }
 
         public boolean hasNext() {
-            while (current <= arr.bound && arr.data.get(current).isEmpty()) {
-                current++;
-            }
-            return current <= arr.bound;
+            return current < arr.bound;
         }
     }
 }
