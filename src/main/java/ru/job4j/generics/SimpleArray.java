@@ -14,9 +14,19 @@ public class SimpleArray<T> implements Iterable<T> {
         this.bound = 0;
     }
 
+    public SimpleArray() {
+        this(10);
+    }
+
     public void add(T model) {
-        Objects.checkIndex(bound, size);
-            data[bound++] = model;
+        //Objects.checkIndex(bound, size);
+        if (bound == size) {
+            size += 10;
+            Object[] tmparr = new Object[size];
+            System.arraycopy(data, 0, tmparr, 0, size);
+            data = tmparr;
+        }
+        data[bound++] = model;
     }
 
     public T get(int index) {
@@ -44,10 +54,12 @@ public class SimpleArray<T> implements Iterable<T> {
     class SimpleArrayIterator implements Iterator<T> {
         private SimpleArray<T> arr;
         private int current;
+        private int modCount;
 
         SimpleArrayIterator(SimpleArray<T> arr) {
             this.arr = arr;
             this.current = 0;
+            this.modCount = arr.bound;
         }
 
         public T next() {
@@ -58,6 +70,9 @@ public class SimpleArray<T> implements Iterable<T> {
         }
 
         public boolean hasNext() {
+            if (modCount != arr.bound) {
+                throw new ConcurrentModificationException();
+            }
             return current < arr.bound;
         }
     }
