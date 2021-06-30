@@ -52,15 +52,10 @@ public class ListUtils {
         ListIterator<T> i = list.listIterator();
         while (i.hasNext()) {
             T value = i.next();
-            for (T el : elements) {
-                if (value == el) {
-                    i.previous();
-                    i.remove();
-                    break;
-                }
+            if (elements.contains(value)) {
+                i.previous();
+                i.remove();
             }
-
         }
     }
-
 }
