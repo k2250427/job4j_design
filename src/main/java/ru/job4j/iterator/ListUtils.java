@@ -53,7 +53,6 @@ public class ListUtils {
         while (i.hasNext()) {
             T value = i.next();
             if (elements.contains(value)) {
-                i.previous();
                 i.remove();
             }
         }
