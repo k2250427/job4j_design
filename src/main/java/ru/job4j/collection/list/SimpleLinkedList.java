@@ -1,4 +1,4 @@
-package ru.job4j.colllection.list;
+package ru.job4j.collection.list;
 
 import ru.job4j.generics.SimpleArray;
 
