@@ -1,10 +1,7 @@
 package ru.job4j.map;
 
 import java.lang.reflect.Field;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class User {
     private String name;
@@ -45,6 +42,12 @@ public class User {
         }
     }
 
+    @SuppressWarnings("checkstyle:EqualsHashCode")
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, children, birthday);
+    }
+
     public static void main(String[] args) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
         Date curDate = new Date();
         User user1 = new User("user", 1, curDate);
@@ -58,5 +61,7 @@ public class User {
         System.out.println("hashCode user2 = " + user2.hashCode());
         buckets(testMap);
     }
+
+
 }
 
