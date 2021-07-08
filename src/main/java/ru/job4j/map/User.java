@@ -42,7 +42,6 @@ public class User {
         }
     }
 
-    @SuppressWarnings("checkstyle:EqualsHashCode")
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -53,6 +52,11 @@ public class User {
         }
         User user = (User) o;
         return children == user.children && name.equals(user.name) && birthday.equals(user.birthday);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, children, birthday);
     }
 
     public static void main(String[] args) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
