@@ -28,7 +28,7 @@ public class User {
         System.out.println(testMap);
 //-----------
         System.out.println("hashCode user1 = " + user1.hashCode());
-         System.out.println("hashCode user2 = " + user2.hashCode());
+        System.out.println("hashCode user2 = " + user2.hashCode());
     }
 }
 
