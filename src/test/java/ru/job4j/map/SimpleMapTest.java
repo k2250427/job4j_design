@@ -48,7 +48,7 @@ public class SimpleMapTest {
         assertTrue(map.put("Tver", 120));
         assertTrue(map.put("Samara", 400));
         assertTrue(map.put("Petrozavodsk", 80));
-        assertEquals(map.get("Samara"), (Integer) 400);
+        assertThat(map.get("Samara"), is(400));
     }
 
     @Test
@@ -68,8 +68,8 @@ public class SimpleMapTest {
         assertTrue(map.put("Petrozavodsk", 80));
         assertTrue(map.remove("Samara"));
         Iterator<String> it = map.iterator();
-        assertEquals(map.get(it.next()), (Integer) 120);
-        assertEquals(map.get(it.next()), (Integer) 80);
+        assertThat(map.get(it.next()), is(120));
+        assertThat(map.get(it.next()), is(80));
         it.next();
     }
 
@@ -81,9 +81,9 @@ public class SimpleMapTest {
         assertTrue(map.put("Petrozavodsk", 80));
         assertFalse(map.remove("Moscow"));
         Iterator<String> it = map.iterator();
-        assertEquals(map.get(it.next()), (Integer) 120);
-        assertEquals(map.get(it.next()), (Integer) 400);
-        assertEquals(map.get(it.next()), (Integer) 80);
+        assertThat(map.get(it.next()), is(120));
+        assertThat(map.get(it.next()), is(400));
+        assertThat(map.get(it.next()), is(80));
         it.next();
     }
 
@@ -94,9 +94,9 @@ public class SimpleMapTest {
         assertTrue(map.put("Samara", 400));
         assertTrue(map.put("Petrozavodsk", 80));
         Iterator<String> it = map.iterator();
-        assertEquals(map.get(it.next()), (Integer) 120);
-        assertEquals(map.get(it.next()), (Integer) 400);
-        assertEquals(map.get(it.next()), (Integer) 80);
+        assertThat(map.get(it.next()), is(120));
+        assertThat(map.get(it.next()), is(400));
+        assertThat(map.get(it.next()), is(80));
         it.next();
     }
 }
