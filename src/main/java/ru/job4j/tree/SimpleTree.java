@@ -1,6 +1,7 @@
 package ru.job4j.tree;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class SimpleTree<E> implements Tree<E> {
     private Node<E> root;
@@ -28,6 +29,26 @@ public class SimpleTree<E> implements Tree<E> {
             return true;
         }
         return false;
+    }
+
+//    private Optional<Node> findByPredicate(Predicate<Node<E>> condition) {
+//
+//    }
+
+    public boolean isBinary() {
+        boolean rsl = true;
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            Node<E> el = data.poll();
+            List<Node<E>> tmpList = el.getChildren();
+            if (tmpList.size() > 2) {
+                rsl = false;
+                break;
+            }
+            data.addAll(tmpList);
+        }
+        return rsl;
     }
 
     @Override
