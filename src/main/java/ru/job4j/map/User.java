@@ -15,7 +15,8 @@ public class User {
         this.birthday.setTime(birthday);
     }
 
-    private static void buckets(HashMap<User, Object> m) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+    private static void buckets(HashMap<User, Object> m) throws NoSuchFieldException, IllegalArgumentException,
+            IllegalAccessException {
         // Pull out the table.
         Field f = m.getClass().getDeclaredField("table");
         f.setAccessible(true);
@@ -59,7 +60,8 @@ public class User {
         return Objects.hash(name, children, birthday);
     }
 
-    public static void main(String[] args) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+    public static void main(String[] args) throws NoSuchFieldException, IllegalArgumentException,
+            IllegalAccessException {
         Date curDate = new Date();
         User user1 = new User("user", 1, curDate);
         User user2 = new User("user", 1, curDate);
@@ -72,7 +74,5 @@ public class User {
         System.out.println("hashCode user2 = " + user2.hashCode());
         buckets(testMap);
     }
-
-
 }
 
