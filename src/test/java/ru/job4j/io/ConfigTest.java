@@ -12,9 +12,9 @@ public class ConfigTest {
         String path = "./data/without_comment.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("key1"),is("value1"));
-        assertThat(config.value("key2"),is("value2"));
-        assertThat(config.value("key3"),is("value3"));
+        assertThat(config.value("key1"), is("value1"));
+        assertThat(config.value("key2"), is("value2"));
+        assertThat(config.value("key3"), is("value3"));
         assertThat(config.value("surname"), is(Matchers.nullValue()));
     }
 
@@ -23,9 +23,9 @@ public class ConfigTest {
         String path = "./data/with_comments_and_empty_lines.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("key1"),is("value1"));
-        assertThat(config.value("key2"),is("value2"));
-        assertThat(config.value("key3"),is("value3"));
+        assertThat(config.value("key1"), is("value1"));
+        assertThat(config.value("key2"), is("value2"));
+        assertThat(config.value("key3"), is("value3"));
     }
 
     @Test (expected = IllegalArgumentException.class)
