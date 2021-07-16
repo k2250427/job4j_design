@@ -54,15 +54,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
-        for (MapEntry<K, V> el: table) {
-            if (el == null) {
-                continue;
-            }
-            if (Objects.equals(el.key, key)) {
-                return el.value;
-            }
-        }
-        return null;
+        int n = indexFor(hash(Objects.hashCode(key)));
+        return table[n].value;
     }
 
     @Override
@@ -70,20 +63,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
         if (get(key) == null) {
             return false;
         }
-        for (int i = 0; i < capacity; i++) {
-            if (table[i] == null) {
-                continue;
-            }
-            if (Objects.equals(table[i].key, key)) {
-                System.arraycopy(table, i + 1, table, i, capacity - i - 1);
-                table[capacity - 1] = null;
-                count--;
-                modCount++;
-                return true;
-            }
-        }
-
-        return false;
+        int n = indexFor(hash(Objects.hashCode(key)));
+        table[n] = null;
+        count--;
+        modCount++;
+        return true;
     }
 
     @Override
