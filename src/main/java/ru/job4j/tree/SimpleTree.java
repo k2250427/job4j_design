@@ -20,11 +20,6 @@ public class SimpleTree<E> implements Tree<E> {
         opNode = findBy(parent);
         if (opNode.isPresent()) {
             Node<E> node = opNode.get();
-            for (Node<E> ch: node.getChildren()) {
-                if (Objects.equals(ch.getValue(), child)) {
-                    return false;
-                }
-            }
             node.addChild(child);
             return true;
         }
