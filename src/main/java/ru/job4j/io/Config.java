@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.BufferedReader;
@@ -22,15 +23,12 @@ public class Config {
                     continue;
                 }
                 String[] parts = line.split("=");
-                if (parts.length == 2) {
-                    values.put(parts[0], parts[1]);
-                } else {
+                if (parts.length != 2) {
                     throw new IllegalArgumentException("Invalid file format: " + path);
                 }
+                values.put(parts[0], parts[1]);
             }
-        } catch (IllegalArgumentException e) {
-            throw e;
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
