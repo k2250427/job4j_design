@@ -1,29 +1,34 @@
 package ru.job4j.question;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Analize {
 
     public static Info diff(Set<User> previous, Set<User> current) {
-        HashMap<Integer, String> prev = new HashMap<>();
-        //HashMap<Integer, String> curr = setToMap(current);
-        int add = 0, upd = 0, del = 0;
+        HashMap<Integer, String> curr = new HashMap<>();
+        int upd = 0, del = 0;
+        Set<Integer> prevkeys = new HashSet<>();
+        Set<Integer> curkeys = new HashSet<>();
 
-        for (User user: previous) {
-            prev.put(user.getId(), user.getName());
+        for (User user: current) {
+            curr.put(user.getId(), user.getName());
+            curkeys.add(user.getId());
         }
 
-        for (User user : current) {
-            String name = user.getName();
+        for (User user : previous) {
+            String name = curr.get(user.getId());
+            prevkeys.add(user.getId());
             if (name != null) {
-                if (!name.equals(prev.get(user.getId()))) {
+                if (!name.equals(user.getName())) {
                     upd++;
                 }
             } else {
                 del++;
             }
         }
-        return new Info(add, upd, del);
+        curkeys.removeAll(prevkeys);
+        return new Info(curkeys.size(), upd, del);
     }
 }
