@@ -67,6 +67,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
             return false;
         }
         int n = indexFor(hash(Objects.hashCode(key)));
+        if (!Objects.equals(key, table[n].key)) {
+            return false;
+        }
         table[n] = null;
         count--;
         modCount++;
