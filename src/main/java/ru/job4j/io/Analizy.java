@@ -20,6 +20,10 @@ public class Analizy {
                     out.newLine();
                 }
             }
+            if (state) {
+                out.write(start.toString() + ";" +  LocalTime.now().toString());
+                out.newLine();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
