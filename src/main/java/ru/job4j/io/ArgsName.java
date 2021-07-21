@@ -11,7 +11,7 @@ public class ArgsName {
         return values.get(key);
     }
 
-    private void parse(String[] args) {
+    public void parse(String[] args) {
         if (args.length == 0) {
             throw new IllegalArgumentException("No arguments specified");
         }
