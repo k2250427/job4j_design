@@ -18,7 +18,6 @@ public class Zip {
                 try (BufferedInputStream out = new BufferedInputStream(
                                                     new FileInputStream(source))) {
                     zip.write(out.readAllBytes());
-                    //zip.closeEntry();
                 }
             }
         } catch (Exception e) {
@@ -32,7 +31,6 @@ public class Zip {
             zip.putNextEntry(new ZipEntry(source.getPath()));
             try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
                 zip.write(out.readAllBytes());
-                zip.closeEntry();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,20 +47,23 @@ public class Zip {
             throw new IllegalArgumentException("Incorrect arguments. Usage: java -jar pack.jar "
                     + "-d=<SOURCE_DIR> [-e=<EXCLUDE_EXTENSION>] -o=<ARCHIVE_NAME>");
         }
-        Predicate<Path> pred;
-        if (ext != null) {
-            pred = p -> !(p.toFile().getName().endsWith(ext));
-        } else {
-            pred = p -> true;
-        }
         List<File> sources = new ArrayList<>();
         try {
-            for (Path path: Search.search(Path.of(argsName.get("d")), pred)) {
+            List<Path> pathList = Search.search(Path.of(argsName.get("d")), getPredicate(ext));
+            for (Path path: pathList) {
                 sources.add(path.toFile());
             }
             packFiles(sources, new File(out));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static Predicate<Path> getPredicate(String ext) {
+        if (ext != null) {
+            return p -> !(p.toFile().getName().endsWith(ext));
+        } else {
+            return p -> true;
         }
     }
 }

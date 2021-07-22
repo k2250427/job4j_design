@@ -76,5 +76,14 @@ public class User {
         System.out.println("hashCode user2 = " + user2.hashCode());
         buckets(testMap);
     }
+
+    @Override
+    public String toString() {
+        return "User{"
+                + "name='" + name + '\''
+                + ", children=" + children
+                + ", birthday=" + birthday
+                + '}';
+    }
 }
 
