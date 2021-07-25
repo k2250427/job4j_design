@@ -54,15 +54,15 @@ public class ConsoleChat {
     }
 
     private void loggedOut(BufferedWriter out) throws IOException {
-        out.write(phrase + "\n");
+        out.write(phrase + System.lineSeparator());
         String answ = getAnswer();
         System.out.println(answ);
-        out.write(answ + "\n");
+        out.write(answ + System.lineSeparator());
     }
 
     private void loggedOut(BufferedWriter out, String answ) throws IOException {
         System.out.println(answ);
-        out.write(answ + "\n");
+        out.write(answ + System.lineSeparator());
     }
 
     public static void main(String[] args) {
