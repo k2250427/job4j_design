@@ -1,12 +1,8 @@
 package ru.job4j.io;
 
-import org.checkerframework.checker.units.qual.C;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class CSVReader {
 
@@ -14,6 +10,7 @@ public class CSVReader {
     private final String delimiter;
     private final String out;
     private final String filter;
+    private final List<String> buffer = new ArrayList<>();
 
     public CSVReader(String path, String delimiter, String out, String filter) {
         this.path = path;
@@ -22,15 +19,47 @@ public class CSVReader {
         this.filter = filter;
     }
 
-    public List<String> readCSV()throws IOException {
+    public void readCSV() {
+        String[] curline;
+        Set<Integer> columns = new HashSet<>();
         try (BufferedReader inFile = new BufferedReader(new FileReader(path,
-                                                            StandardCharsets.UTF_8));
-             BufferedWriter outFile = new BufferedWriter(new FileWriter(out,
                                                             StandardCharsets.UTF_8))) {
-            Scanner inScan = new Scanner(inFile).useDelimiter(delimiter);
-
+            Scanner inScan = new Scanner(inFile);
+            curline = inScan.nextLine().split(delimiter);
+            for (int i = 0; i < curline.length; i++) {
+                if (filter.contains(curline[i])) {
+                    columns.add(i);
+                }
+            }
+            while (inScan.hasNext()) {
+                String tmp = "";
+                curline = inScan.nextLine().split(delimiter);
+                for (int i = 0; i < curline.length; i++) {
+                    if (columns.contains(i)) {
+                        tmp = tmp.concat((tmp.isBlank() ? "" : ";") + curline[i]);
+                    }
+                }
+                buffer.add(tmp);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return null;
+        if (out.equals("stdout")) {
+            buffer.forEach(System.out::println);
+        } else {
+            writeBuffer();
+        }
+    }
+
+    private void writeBuffer() {
+        try (BufferedWriter outFile = new BufferedWriter(new FileWriter(out,
+                     StandardCharsets.UTF_8))) {
+            for (String line:buffer) {
+                outFile.write(line + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
@@ -61,6 +90,7 @@ public class CSVReader {
                     + "-o[ut]=stdout|<OUTPUT_FILE>");
         }
         CSVReader csvReader = new CSVReader(path, delim, out, filter);
+        csvReader.readCSV();
     }
 }
 
