@@ -9,10 +9,15 @@ public class UsageLog4j {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public static void main(String[] args) {
-        LOG.trace("trace message");
-        LOG.debug("debug message");
-        LOG.info("info message");
-        LOG.warn("warn message");
-        LOG.error("error message");
+        boolean someBool = true;
+        char someChar = 'A';
+        short shortNumber = 222;
+        int intNumber = 33;
+        long longNumber = 123L;
+        float floatNumber = 584.11F;
+        double doubleNumber = 123.23D;
+        LOG.debug("Primitives - boolean: {}, char: {}, short: {}, int: {}, "
+                + "long: {}, float: {}, double: {}", someBool, someChar, shortNumber,
+                intNumber, longNumber, floatNumber, doubleNumber);
     }
 }
