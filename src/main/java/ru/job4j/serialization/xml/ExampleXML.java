@@ -8,7 +8,7 @@ import java.io.*;
 
 @XmlRootElement(name = "contact")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Example implements Serializable {
+public class ExampleXML implements Serializable {
     private static final long serialVersionUID = 1L;
     @XmlElement
     private int zipCode;
@@ -16,11 +16,11 @@ public class Example implements Serializable {
     private String phone;
     private Person person;
 
-    public Example() {
+    public ExampleXML() {
 
     }
 
-    public Example(int zipCode, String phone, String name, boolean sex, int age) {
+    public ExampleXML(int zipCode, String phone, String name, boolean sex, int age) {
         this.zipCode = zipCode;
         this.phone = phone;
         this.person = new Person(name, sex, age);
@@ -44,13 +44,13 @@ public class Example implements Serializable {
     }
 
     public static void main(String[] args) throws Exception {
-        final Example contact = new Example(123456,
+        final ExampleXML contact = new ExampleXML(123456,
                 "+7 (111) 111-11-11",
                 "Steve Black",
                 true,
                 39);
 
-        JAXBContext context = JAXBContext.newInstance(Example.class);
+        JAXBContext context = JAXBContext.newInstance(ExampleXML.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String xml;
@@ -62,7 +62,7 @@ public class Example implements Serializable {
 
         Unmarshaller unmarshaller = context.createUnmarshaller();
         try (StringReader reader = new StringReader(xml)) {
-            Example result = (Example) unmarshaller.unmarshal(reader);
+            ExampleXML result = (ExampleXML) unmarshaller.unmarshal(reader);
             System.out.println(result);
         }
     }
