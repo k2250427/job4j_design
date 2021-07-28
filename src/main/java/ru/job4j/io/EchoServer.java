@@ -3,11 +3,15 @@ package ru.job4j.io;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EchoServer {
-    public static void main(String[] args) throws IOException {
-        try (ServerSocket server = new ServerSocket(9100)) {
+
+    private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
+
+    public static void main(String[] args) {
+        try (ServerSocket server = new ServerSocket(9000)) {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
                 try (OutputStream out = socket.getOutputStream();
@@ -30,6 +34,8 @@ public class EchoServer {
                     out.flush();
                 }
             }
+        } catch (IOException e) {
+            LOG.error("IOException", e);
         }
     }
 }
