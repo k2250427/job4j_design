@@ -49,8 +49,9 @@ public class Contact implements Serializable {
              ObjectInputStream ois =
                      new ObjectInputStream(fis)) {
             final Contact contactFromFile = (Contact) ois.readObject();
+            System.out.println("Десериализованный объект");
+            System.out.println(contactFromFile);
         }
-        System.out.println("Десериализованный объект");
-        System.out.println(contact);
+
     }
 }
