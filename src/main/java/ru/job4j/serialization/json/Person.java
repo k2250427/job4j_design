@@ -1,6 +1,6 @@
 package ru.job4j.serialization.json;
 
-class Person {
+public class Person {
     private final String name;
     private final boolean sex;
     private final int age;

@@ -23,6 +23,10 @@ public class ExampleJSON implements Serializable {
         return phone;
     }
 
+    public Person getPerson() {
+        return person;
+    }
+
     @Override
     public String toString() {
         return "Contact{"
