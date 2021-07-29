@@ -159,7 +159,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <finalName>search</finalName>
+                            <finalName>find</finalName>
                             <filters>
                                 <filter>
                                     <artifact>*:*</artifact>
