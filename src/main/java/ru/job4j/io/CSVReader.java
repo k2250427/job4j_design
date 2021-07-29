@@ -67,19 +67,19 @@ public class CSVReader {
         argsName.parse(args);
         String path = argsName.get("p");
         if (path == null) {
-            argsName.get("path");
+            path = argsName.get("path");
         }
         String delim = argsName.get("d");
         if (delim == null) {
-            argsName.get("delimiter");
+            delim = argsName.get("delimiter");
         }
         String filter = argsName.get("f");
         if (filter == null) {
-            argsName.get("filter");
+            filter = argsName.get("filter");
         }
         String out = argsName.get("o");
         if (out == null) {
-            argsName.get("out");
+            out = argsName.get("out");
         }
         if (path == null || delim == null || filter == null || out == null) {
             throw new IllegalArgumentException("Incorrect arguments. "
