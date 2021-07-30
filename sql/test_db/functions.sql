@@ -36,4 +36,4 @@ select pe.name as user, avg(price) from devices dev inner join devices_people dp
 inner join people pe on dp.people_id=pe.id group by pe.name;
 
 select pe.name as user, avg(price) from devices dev inner join devices_people dp on dev.id=dp.device_id
-inner join people pe on dp.people_id=pe.id where dev.price>5000 group by pe.name;
+inner join people pe on dp.people_id=pe.id group by pe.name having avg(price)>5000;
