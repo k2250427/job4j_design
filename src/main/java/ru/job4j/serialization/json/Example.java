@@ -31,7 +31,7 @@ public class Example implements Serializable {
         return "Contact{"
                 + "zipCode=" + zipCode
                 + ", phone='" + phone + '\''
-                + ", pepson=" + person
+                + ", person=" + person
                 + '}';
     }
 

@@ -11,15 +11,6 @@ public class Person {
         this.age = age;
     }
 
-    @Override
-    public String toString() {
-        return "Person{"
-                + "name=" + name
-                + ", sex=" + sex
-                + ", age=" + age
-                + '}';
-    }
-
     public String getName() {
         return name;
     }
@@ -30,5 +21,14 @@ public class Person {
 
     public int getAge() {
         return age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{"
+                + "name=" + name
+                + ", sex=" + sex
+                + ", age=" + age
+                + '}';
     }
 }
