@@ -30,9 +30,9 @@ insert into engines(name) values('бензиновый');
 insert into engines(name) values('дизельный');
 insert into engines(name) values('реактивный');
 
-insert into boxes(name) values('автомат');
-insert into boxes(name) values('механика');
-insert into boxes(name) values('картонная');
+insert into engines(name) values('автомат');
+insert into engines(name) values('механика');
+insert into engines(name) values('картонная');
 
 
 insert into vehicle(name,body_id,engine_id,box_id) values('БМВ',1,1,1);

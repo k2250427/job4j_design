@@ -28,6 +28,6 @@ create table books(
 );
 
 create table author_book(
-    author_id int references author(id) unique,
-    book_id int references book(id) unique
+    author_id int references author(id),
+    book_id int references book(id)
 );
