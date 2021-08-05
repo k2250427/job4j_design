@@ -40,16 +40,27 @@ public class Find {
         this.out = out;
     }
 
+    private String maskToRegex(String mask) {
+        mask = mask.replace("\\", "\\\\");
+        mask = mask.replace("#", "\\#");
+        mask = mask.replace(".", "\\.");
+        mask = mask.replace("*", ".*");
+        mask = mask.replace("?", ".");
+        mask = "^".concat(mask).concat("$");
+        return mask;
+    }
+
     public void search() throws IOException, PatternSyntaxException {
         Predicate<Path> condition;
-        if (type == Types.MASK) {
-            String ext = name.substring(name.indexOf('*') + 1);
-            condition = p -> p.toString().endsWith(ext);
-        } else if (type == Types.REGEX) {
-            Pattern pattern = Pattern.compile(name);
-            condition = p -> pattern.matcher(p.getFileName().toString()).find();
-        } else {
+        if (type == Types.NAME) {
             condition = p -> name.equals(p.getFileName().toString());
+        } else {
+            String regex = name;
+            if (type == Types.MASK) {
+                regex = maskToRegex(name);
+            }
+            Pattern pattern = Pattern.compile(regex);
+            condition = p -> pattern.matcher(p.getFileName().toString()).find();
         }
         SearchFiles searcher = new SearchFiles(condition);
         Files.walkFileTree(dir, searcher);
