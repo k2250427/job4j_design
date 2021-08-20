@@ -17,7 +17,7 @@ public class MaxMin {
     private static <T> T getResult(List<T> value, Comparator<T> comparator, int expected) {
         T rsl = value.get(0);
         for (T item :value) {
-            if (comparator.compare(rsl, item) == expected) {
+            if (comparator.compare(rsl, item) * expected > 0) {
                 rsl = item;
             }
         }
